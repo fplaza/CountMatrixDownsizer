@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 
         std::vector<DownsizingStats> samples_downsizing_stats(count_matrix.ncol());
         unsigned long progress = 0;
-        #pragma omp parallel
+        #pragma omp parallel num_threads(settings.downsizing.num_threads)
         {
             SampleDownsizer sample_downsizer(
                     count_matrix,
