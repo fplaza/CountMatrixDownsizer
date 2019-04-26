@@ -13,6 +13,7 @@ struct DownsizingStats
     unsigned long target_read_count;
     unsigned long num_repetitions;
     unsigned long initial_read_count;
+    unsigned long initial_gene_count;
     bool success;
     double mean_gene_count;
     double stddev_gene_count;

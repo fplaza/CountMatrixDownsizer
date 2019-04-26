@@ -28,7 +28,8 @@ struct SampleDownsizer::Impl
     size_t curr_sample_;
     std::vector<unsigned long> curr_rep_genes_abundance_profile_;
     std::vector<unsigned long> final_genes_abundance_profile_;
-    size_t initial_read_count_;
+    unsigned long initial_read_count_;
+    unsigned long initial_gene_count_;
     std::vector<unsigned long> reads_pool_;
     std::vector<unsigned long> gene_count_;
 };
@@ -181,6 +182,7 @@ DownsizingStats SampleDownsizer::Impl::compute_stats()
         target_read_count_,
         num_repetitions_,
         initial_read_count_,
+        initial_gene_count_,
         initial_read_count_ >= target_read_count_,
         mean_gene_count,
         stddev_gene_count
@@ -199,6 +201,7 @@ DownsizingStats SampleDownsizer::downsize(const size_t curr_sample)
     impl_->reset_genes_abundance_profile(impl_->curr_rep_genes_abundance_profile_);
     impl_->reset_genes_abundance_profile(impl_->final_genes_abundance_profile_);
     impl_->load_inital_genes_abundance_profile();
+    impl_-> initial_gene_count_ = impl_->compute_gene_count();
 
     if (impl_->initial_read_count_ >= impl_->target_read_count_)
     {

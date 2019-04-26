@@ -7,7 +7,7 @@
 #include <iomanip>
 
 const char DownsizingStatsPrinter::HEADER[] = 
-"sample_name	is_unique_reads	gene_count_threshold	total_read_count	final_read_count	downsizing_repeat_count	mean_gene_count	stddev_gene_count\n";
+"sample_name	initial_read_count	target_read_count	downsizing_num_rep	initial_gene_count	final_mean_gene_count	final_stddev_gene_count\n";
 
 void DownsizingStatsPrinter::print(const std::vector<DownsizingStats>& samples_downsizing_stats, const std::string& output_file)
 {
@@ -19,10 +19,10 @@ void DownsizingStatsPrinter::print(const std::vector<DownsizingStats>& samples_d
     for (std::vector<DownsizingStats>::const_iterator downsizing_stats = samples_downsizing_stats.begin(); downsizing_stats < samples_downsizing_stats.end(); ++downsizing_stats)
     {
         ofs << downsizing_stats->sample_name << 
-            '\t' << "NA\t1" << 
             '\t' << downsizing_stats->initial_read_count <<
             '\t' << downsizing_stats->target_read_count << 
-            '\t' << downsizing_stats->num_repetitions;
+            '\t' << downsizing_stats->num_repetitions <<
+            '\t' << downsizing_stats->initial_gene_count;
 
         if (downsizing_stats->success)
         {
